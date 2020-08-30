@@ -11,16 +11,19 @@ public class Muestra {
     @Column(name = "muestra_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer muestraId;
-
+    @Column(name = "boya")
     @ManyToOne
     @JoinColumn(name = "boya_id", referencedColumnName = "boya_id")
     private Boya boya;
+    @Column(name = "horario_muestra")
     private Date horarioMuestra;
+    @Column(name = "mat_embarcacion")
     private String matEmbarcacion;
+    @Column(name = "longitud_muestra")
     private double longMuestra;
-
+    @Column(name = "latitud_muestra")
     private double latMuestra;
-
+    @Column(name = "altura_nivel")
     private Integer alturaNivelMar;
 
     public Integer getMuestraId() {

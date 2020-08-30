@@ -12,13 +12,15 @@ public class Boya {
     @Column(name = "boya_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer boyaId;
+    @Column(name = "color_boya")
     private String colorBoya ;   
 
-    
+    @Column(name = "muestras")
     @OneToMany(mappedBy = "muestra", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Muestra> muestras = new ArrayList<>();
+    @Column(name = "longitud_boya")
     private double longBoya;
-
+    @Column(name = "latitud_boya")
     private double latBoya;
 
     public Integer getBoyaId() {
