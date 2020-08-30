@@ -19,7 +19,7 @@ public class BoyaService {
         boyaRepo.save(boya);
     }
 
-    public Boya crearBoya(String nombre, double latBoya, double longBoya) {
+    public Boya crearBoya(double latBoya, double longBoya) {
         Boya boya = new Boya();
         boya.setColorBoya(null);
         boya.setLatBoya(latBoya);

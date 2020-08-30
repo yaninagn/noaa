@@ -11,7 +11,7 @@ public class Muestra {
     @Column(name = "muestra_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer muestraId;
-    @Column(name = "boya")
+ 
     @ManyToOne
     @JoinColumn(name = "boya_id", referencedColumnName = "boya_id")
     private Boya boya;

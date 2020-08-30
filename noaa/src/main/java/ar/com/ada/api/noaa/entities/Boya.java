@@ -4,6 +4,8 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "boya")
 public class Boya {
@@ -15,8 +17,9 @@ public class Boya {
     @Column(name = "color_boya")
     private String colorBoya ;   
 
-    @Column(name = "muestras")
-    @OneToMany(mappedBy = "muestra", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  
+    @OneToMany(mappedBy = "boya", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Muestra> muestras = new ArrayList<>();
     @Column(name = "longitud_boya")
     private double longBoya;
