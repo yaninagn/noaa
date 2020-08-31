@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import ar.com.ada.api.noaa.entities.Muestra;
 import ar.com.ada.api.noaa.repo.MuestraRepo;
 
-
 @Service
 public class MuestraService {
 
@@ -41,4 +40,10 @@ public class MuestraService {
         return muestraRepo.findAll();
     }
 
+    public List<Muestra> listarMuestrasPorId(Integer boyaId) {
+
+        return muestraRepo.findAllOrderById(boyaId);
+    }
+
+	
 }

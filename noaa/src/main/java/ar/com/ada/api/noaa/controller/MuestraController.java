@@ -1,7 +1,11 @@
 package ar.com.ada.api.noaa.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -43,13 +47,23 @@ public ResponseEntity<MuestraResponse> crearBoya(@RequestBody Muestra muestra) {
    MuestraResponse r = new MuestraResponse();
     r.id = muestra.getMuestraId();
     return ResponseEntity.ok(r);
+//me falta hacer que tire el nuevo color
 
 }
 
 
 /*
 GET /muestras/boyas/{idBoya} : que devuelva la lista de muestras de una boya, indicado por “idBoya”. 
- 
+ */
+@GetMapping("/muestras/boyas/{boyaId}")
+    ResponseEntity<List<Muestra>> listarMuestras(@PathVariable Integer boyaId) {
+        List<Muestra> listaMuestras = muestraService.listarMuestrasPorId(boyaId);
+
+        return ResponseEntity.ok(listaMuestras);
+    }
+
+
+ /*
 DELETE /muestras/{id}:   Reseteara el color de la luz de la boya a “AZUL” a partir de una muestra especifica  
     */
 }
