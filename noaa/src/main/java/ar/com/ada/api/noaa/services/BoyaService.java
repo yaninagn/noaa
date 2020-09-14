@@ -32,6 +32,23 @@ public class BoyaService {
         return boyaRepo.save(boya);
     }
 
+    public Boya actualizarColorBoyaPorId(Integer boyaId, Integer alturaNivelMar) {
+
+        Boya boya = buscarPorId(boyaId);
+
+        if (alturaNivelMar < -50 || alturaNivelMar > 50) { 
+            boya.setColorBoya("AMARILLO"); 
+        } else if (alturaNivelMar <  -100 && alturaNivelMar > 100) {
+            boya.setColorBoya("ROJO"); 
+        } else {
+            boya.setColorBoya("VERDE"); 
+        }
+        
+        actualizarBoya(boya);
+
+        return boya;
+    }
+
     public Boya buscarPorId(Integer boyaId) {
         Optional<Boya> opBoya = boyaRepo.findById(boyaId);
 
@@ -48,5 +65,9 @@ public class BoyaService {
     public List<Boya> listarTodas() {
         return boyaRepo.findAll();
     }
+
+	public List<Boya> listarTodas(String color) {
+		return boyaRepo.findByColorBoya(color);
+	}
 
 }

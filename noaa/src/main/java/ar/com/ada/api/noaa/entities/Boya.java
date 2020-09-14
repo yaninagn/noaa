@@ -28,6 +28,8 @@ public class Boya {
     @Column(name = "latitud_boya")
     private double latitudInstalacion;
 
+    
+
     public Integer getBoyaId() {
         return boyaId;
     }
@@ -67,12 +69,12 @@ public class Boya {
     public void setColorBoya(final String colorBoya) {
         this.colorBoya = colorBoya;
     }
-    public void agregarMuestra(Muestra muestra) {
-        this.muestras.add(muestra);
-        muestra.getBoyas().add(this);
+
+    public Boya() {
     }
-    public void agregarCategoria(Categoria categoria) {
-        this.categorias.add(categoria);
-        categoria.getCursos().add(this);
+
+    public Boya(Integer boyaId) {
+        this.boyaId = boyaId;
     }
+  
 }

@@ -1,5 +1,6 @@
 package ar.com.ada.api.noaa.controller;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import ar.com.ada.api.noaa.entities.Muestra;
+import ar.com.ada.api.noaa.entities.*;
+import ar.com.ada.api.noaa.models.request.MuestraCreate;
 import ar.com.ada.api.noaa.models.response.MuestraResponse;
 import ar.com.ada.api.noaa.services.BoyaService;
 import ar.com.ada.api.noaa.services.MuestraService;
 
+@RestController
 public class MuestraController {
     /*
      * POST /muestras : que registre una muestra RequestBody { “boyaId”: 32,
@@ -33,14 +37,24 @@ public class MuestraController {
     BoyaService boyaService;
 
     @PostMapping("/muestras")
-    public ResponseEntity<MuestraResponse> registrarMuestra(@RequestBody Muestra muestra) {
-       muestraService.crearMuestra(muestra);
+    public ResponseEntity<MuestraResponse> registrarMuestra(@RequestBody MuestraCreate mc) {
+        Muestra muestra = new Muestra();
+        muestra.setBoya(new Boya(mc.getBoyaId()));
+        muestra.setAlturaNivelMar(mc.getAlturaNivelMar());
+        muestra.setHorarioMuestra(mc.getHorarioMuestra());
+        muestra.setLatitud(mc.getLatitud());
+        muestra.setLongitud(mc.getLongitud());
+        muestra.setMatEmbarcacion(mc.getMatEmbarcacion());
+        muestraService.crearMuestra(muestra);
 
         if (muestra == null)
             return ResponseEntity.badRequest().build();
 
+        Boya boya = boyaService.actualizarColorBoyaPorId(muestra.getBoya().getBoyaId(), muestra.getAlturaNivelMar());
+
         MuestraResponse r = new MuestraResponse();
         r.id = muestra.getMuestraId();
+        r.boyaColor = boya.getColorBoya();
         return ResponseEntity.ok(r);
         // me falta hacer que tire el nuevo color
 
@@ -55,10 +69,16 @@ public class MuestraController {
         return ResponseEntity.ok(listaMuestras);
     }
 
-   
+    // GET /muestras/colores/{color} : que devuelva la lista de muestras de un color
+    @GetMapping("/muestras/colores/{color}")
+    ResponseEntity<Iterator<Boya>> listarMuestrasPorColor(@PathVariable String color) {
+        Iterator<Boya> listaMuestras = boyaService.listarTodas(color).iterator();
 
-    /*
+        return ResponseEntity.ok(listaMuestras);
+    /*FALTA CREAR:
      * DELETE /muestras/{id}: Reseteara el color de la luz de la boya a “AZUL” a
      * partir de una muestra especifica
      */
+
+    }
 }
