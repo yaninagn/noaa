@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
 @Entity
 @Table(name = "boya")
 public class Boya {
@@ -19,18 +20,19 @@ public class Boya {
 
   
     @OneToMany(mappedBy = "boya", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+
     @JsonIgnore
     private List<Muestra> muestras = new ArrayList<>();
     @Column(name = "longitud_boya")
-    private double longBoya;
+    private double longitudInstalacion;
     @Column(name = "latitud_boya")
-    private double latBoya;
+    private double latitudInstalacion;
 
     public Integer getBoyaId() {
         return boyaId;
     }
 
-    public void setBoyaId(Integer boyaId) {
+    public void setBoyaId(final Integer boyaId) {
         this.boyaId = boyaId;
     }
 
@@ -38,33 +40,39 @@ public class Boya {
         return muestras;
     }
 
-    public void setMuestras(List<Muestra> muestras) {
+    public void setMuestras(final List<Muestra> muestras) {
         this.muestras = muestras;
     }
 
-    public double getLongBoya() {
-        return longBoya;
+    public double getLongitudInstalacion() {
+        return longitudInstalacion;
     }
 
-    public void setLongBoya(double longBoya) {
-        this.longBoya = longBoya;
+    public void setLongitudInstalacion(final double longitudInstalacion) {
+        this.longitudInstalacion = longitudInstalacion;
     }
 
-    public double getLatBoya() {
-        return latBoya;
+    public double getLatitudInstalacion() {
+        return latitudInstalacion;
     }
 
-    public void setLatBoya(double latBoya) {
-        this.latBoya = latBoya;
+    public void setLatitudInstalacion(final double latitudInstalacion) {
+        this.latitudInstalacion = latitudInstalacion;
     }
 
     public String getColorBoya() {
         return colorBoya;
     }
 
-    public void setColorBoya(String colorBoya) {
+    public void setColorBoya(final String colorBoya) {
         this.colorBoya = colorBoya;
     }
-
-
+    public void agregarMuestra(Muestra muestra) {
+        this.muestras.add(muestra);
+        muestra.getBoyas().add(this);
+    }
+    public void agregarCategoria(Categoria categoria) {
+        this.categorias.add(categoria);
+        categoria.getCursos().add(this);
+    }
 }

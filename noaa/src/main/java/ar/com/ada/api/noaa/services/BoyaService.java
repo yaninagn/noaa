@@ -19,11 +19,11 @@ public class BoyaService {
         boyaRepo.save(boya);
     }
 
-    public Boya crearBoya(double latBoya, double longBoya) {
+    public Boya crearBoya(double latitudIstalacion, double longitudInstalacion) {
         Boya boya = new Boya();
         boya.setColorBoya(null);
-        boya.setLatBoya(latBoya);
-        boya.setLongBoya(longBoya);
+        boya.setLatitudInstalacion(latitudIstalacion);
+        boya.setLongitudInstalacion(longitudInstalacion);
         boyaRepo.save(boya);
         return boya;
     }

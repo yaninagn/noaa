@@ -20,9 +20,9 @@ public class Muestra {
     @Column(name = "mat_embarcacion")
     private String matEmbarcacion;
     @Column(name = "longitud_muestra")
-    private double longMuestra;
+    private double longitud;
     @Column(name = "latitud_muestra")
-    private double latMuestra;
+    private double latitud;
     @Column(name = "altura_nivel")
     private Integer alturaNivelMar;
 
@@ -58,20 +58,20 @@ public class Muestra {
         this.matEmbarcacion = matEmbarcacion;
     }
 
-    public double getLongMuestra() {
-        return longMuestra;
+    public double getLongitud() {
+        return longitud;
     }
 
-    public void setLongMuestra(double longMuestra) {
-        this.longMuestra = longMuestra;
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
     }
 
-    public double getLatMuestra() {
-        return latMuestra;
+    public double getLatitud() {
+        return latitud;
     }
 
-    public void setLatMuestra(double latMuestra) {
-        this.latMuestra = latMuestra;
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
     }
 
     public Integer getAlturaNivelMar() {

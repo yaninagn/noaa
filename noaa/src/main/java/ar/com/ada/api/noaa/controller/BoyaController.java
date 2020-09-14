@@ -25,7 +25,8 @@ public class BoyaController {
 
     @PostMapping("/boyas")
     public ResponseEntity<GenericResponse> crearBoya(@RequestBody BoyaCreate boyaCreate) {
-        Boya boyaCreada = boyaService.crearBoya(boyaCreate.latBoya, boyaCreate.longBoya);
+        Boya boyaCreada = boyaService.crearBoya(boyaCreate.latitudInstalacion, boyaCreate.longitudInstalacion);
+
 
         if (boyaCreada == null)
             return ResponseEntity.badRequest().build();
