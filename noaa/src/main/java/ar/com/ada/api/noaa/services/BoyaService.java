@@ -38,7 +38,7 @@ public class BoyaService {
 
         if (alturaNivelMar < -50 || alturaNivelMar > 50) { 
             boya.setColorBoya("AMARILLO"); 
-        } else if (alturaNivelMar <  -100 && alturaNivelMar > 100) {
+        } else if (alturaNivelMar <  -100 || alturaNivelMar > 100) {
             boya.setColorBoya("ROJO"); 
         } else {
             boya.setColorBoya("VERDE"); 
@@ -52,9 +52,6 @@ public class BoyaService {
     public Boya buscarPorId(Integer boyaId) {
         Optional<Boya> opBoya = boyaRepo.findById(boyaId);
 
-        // Si tiene un valor de boya en el elemento que trajo.
-        // Camion con heladera dentro. hasta que no abrimos la puerta no sabemos si la
-        // trajo.
         if (opBoya.isPresent())
             return opBoya.get();
         else

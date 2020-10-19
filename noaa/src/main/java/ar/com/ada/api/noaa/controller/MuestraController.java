@@ -56,7 +56,6 @@ public class MuestraController {
         r.id = muestra.getMuestraId();
         r.boyaColor = boya.getColorBoya();
         return ResponseEntity.ok(r);
-        // me falta hacer que tire el nuevo color
 
     }
 
@@ -69,16 +68,21 @@ public class MuestraController {
         return ResponseEntity.ok(listaMuestras);
     }
 
-    // GET /muestras/colores/{color} : que devuelva la lista de muestras de un color
+    /* GET /muestras/colores/{color} : que devuelva la lista de muestras de un color
     @GetMapping("/muestras/colores/{color}")
-    ResponseEntity<Iterator<Boya>> listarMuestrasPorColor(@PathVariable String color) {
-        Iterator<Boya> listaMuestras = boyaService.listarTodas(color).iterator();
-
-        return ResponseEntity.ok(listaMuestras);
+    public ResponseEntity<List<MuestraColorResponse>> listaMuestrasPorColor(@PathVariable String color) {
+        List<Muestra> listaMuestrasPorColor = mService.obtenerPorColor(color);
+        if (listaMuestrasPorColor.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(ResponseMethodsMapper
+        .crearListaMuestraColorResponse(listaMuestrasPorColor));
+*/
+        
     /*FALTA CREAR:
      * DELETE /muestras/{id}: Reseteara el color de la luz de la boya a “AZUL” a
      * partir de una muestra especifica
-     */
+     
 
-    }
+    }*/
 }
